@@ -37,6 +37,14 @@ func (uc *UserUseCase) GetUserByEmail(ctx context.Context, email string) (*model
 	return user, nil
 }
 
+func (uc *UserUseCase) GetUserById(ctx context.Context, id int64) (*models.User, error) {
+	user, err := uc.UserService.GetUserById(ctx, id)
+	if err != nil {
+		return nil, err
+	}
+	return user, nil
+}
+
 func (uc *UserUseCase) RegisterUser(ctx context.Context, user *models.User) error {
 	hashedPassword, err := utils.HashPassword(user.Password)
 	if err != nil {

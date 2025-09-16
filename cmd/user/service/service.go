@@ -21,8 +21,17 @@ func (svc *UserService) GetUserByEmail(ctx context.Context, email string) (*mode
 	if err != nil {
 		return nil, err
 	}
+
 	return user, nil
 
+}
+
+func (svc *UserService) GetUserById(ctx context.Context, id int64) (*models.User, error) {
+	user, err := svc.UserRepo.GetUserById(ctx, id)
+	if err != nil {
+		return nil, err
+	}
+	return user, nil
 }
 
 func (svc *UserService) CreateNewUser(ctx context.Context, user *models.User) (int64, error) {

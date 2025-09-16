@@ -3,9 +3,9 @@ app:
 
 database:
   host: localhost
-  port: 5432
+  port: 5433
   user: postgres
-  password: 1234
+  password: adaremit
   name: user
 
 redis:
@@ -14,4 +14,4 @@ redis:
   password:
 
 secret:
-  jwt_secret: "5ecre7"
+  jwt_secret: "Khz0yd8Tf8yAG80PuQAX2nHEjGHiEgh/gQO2PNhMZjY="

@@ -92,6 +92,29 @@ func (h *UserHandler) LoginRoutes(c *gin.Context) {
 
 }
 
+func (h *UserHandler) GetUserInfo(c *gin.Context) {
+	userIDStr, exists := c.Get("user_id")
+	if !exists {
+		c.JSON(http.StatusUnauthorized, gin.H{"error_message": "unauthorized"})
+		return
+	}
+
+	userID, ok := userIDStr.(float64)
+
+	if !ok {
+		c.JSON(http.StatusUnauthorized, gin.H{"error_message": "unauthorized"})
+		return
+	}
+
+	user, err := h.UserUseCase.GetUserById(c.Request.Context(), int64(userID))
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"error_message": err.Error()})
+		return
+	}
+
+	c.JSON(http.StatusOK, gin.H{"name": user.Name, "email": user.Email})
+}
+
 func (h *UserHandler) Ping(c *gin.Context) {
 	c.JSON(http.StatusOK, gin.H{
 		"status": "pong",

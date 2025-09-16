@@ -27,7 +27,7 @@ func main() {
 	port := cfg.App.Port
 	router := gin.Default()
 
-	routes.SetupRoutes(router, *UserHandler)
+	routes.SetupRoutes(router, *UserHandler, cfg.Secret.JWTSecret)
 
 	router.Run(":" + port)
 
